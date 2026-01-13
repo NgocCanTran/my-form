@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`w-full-screen max-h-screen inset-10 mx-auto bg-gray-300`}
+        className={`max-w-screen max-h-screen mx-auto`}
       >
         {children}
       </body>

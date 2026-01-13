@@ -1,25 +1,39 @@
-import Buttons from "../buttons/buttons-login";
-import Welcome from "../logo/logo-welcome";
+"use client";
+import Header from "../layout/header";
 
 const LoginForm = () => {
+
+    const validateValueInput = () => {
+
+        const username = document.getElementById('username') as HTMLInputElement;
+        const password = document.getElementById('password') as HTMLInputElement;
+
+        const valueUsername = username.value;
+        const valuePassword = password.value;
+
+        const usernameRegex = `/^[a-zA-Z0-9]{6,16}$/`;
+        const passwordRegex = `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/`;
+
+        if (valueUsername.trim() === "" || valuePassword.trim() === "") {
+            alert("The input field is not empty");
+        } else if (!valueUsername.match(usernameRegex) || !valuePassword.match(passwordRegex)) {
+            alert("The username or password are not correct")
+        } else {
+
+        }
+    }
+
     return (
-        <div className="border rounded-lg m-3 items-center">
-            <Welcome></Welcome>
-            <div className="">
+        <div className="relative rounded-lg items-center">
+            <Header classN={"top-0 left-0"} text={"Login"}></Header>
+            <div className="mt-10">
                 <form>
-                    <input className="border border-gray-400 rounded-sm py-3 px-4 outline-none" placeholder="Enter the account name"></input>
-                    <input className="my-5 border border-gray-400 block rounded-sm py-3 px-4 outline-none" type="password" placeholder="Enter the password"></input>
-                    <div className="flex justify-between">
-                        <div className="items-start">
-                            <input className="h-4 w-4" type="checkbox"></input>
-                            <label className="ml-2 text-sm text-gray-500">Remember me</label>
-                        </div>
-                        <button className="outline-none text-sm text-gray-600 mb-4">Forgot Password?</button>
-                    </div>
+                    <input id='username' type="text" className="my-5 bg-gray-200 focus:outline-none text-black block rounded-sm py-3 px-4 " placeholder="Enter the account name"></input>
+                    <input id='password' className="my-5 bg-gray-200 focus:outline-none text-black block rounded-sm py-2 px-3 " type="password" placeholder="Enter the password"></input>
+                    <button className="outline-none border hover:text-white  hover:bg-blue-500 hover:outline-none hover:border-none px-3 py-2 rounded-lg text-sm text-white mb-4">Forgot Password?</button>
                 </form>
             </div>
-            <Buttons text={"Submit"} classN={"mb-5"}></Buttons>
-            <div className="">Do not have an account? <button className="text-pink-600">Sign Up</button></div>
+            <button id='submit' className="border-none  hover:bg-blue-500 hover:border hover:border-white px-4 py-2 bg-blue-100 text-black rounded-sm text-lg" onClick={() => validateValueInput()}>Submit</button>
         </div>
     );
 }
